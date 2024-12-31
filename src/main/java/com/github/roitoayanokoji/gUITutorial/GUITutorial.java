@@ -44,10 +44,19 @@ public final class GUITutorial extends JavaPlugin implements Listener {
     }
 
     private void openGUI(Player player){
-        Inventory gui = Bukkit.createInventory(null,27,"GUI");
-        //stone
-        ItemStack stone = new ItemStack(Material.STONE);
-        gui.setItem(0, stone);
+        Inventory gui = Bukkit.createInventory(null,54,"GUI");
+        //空白を埋めるアイテム
+        ItemStack fillerItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        ItemMeta fillerMeta = fillerItem.getItemMeta();
+        if (fillerMeta != null) {
+            fillerMeta.setDisplayName(" ");
+            fillerItem.setItemMeta(fillerMeta);
+        }
+
+        for (int i = 0; i < gui.getSize(); i++) {
+            gui.setItem(i, fillerItem);
+        }
+
         //Close Item
         ItemStack CloseItem = new ItemStack(Material.BARRIER);
         ItemMeta CloseMeta = CloseItem.getItemMeta();
