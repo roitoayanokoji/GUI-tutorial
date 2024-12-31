@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,5 +44,10 @@ public final class GUITutorial extends JavaPlugin {
         gui.setItem(0, item);
 
         player.openInventory(gui);
+    }
+    public void  onInventoryClick(InventoryClickEvent event){
+        if (event.getView().getTitle().equals("GUI-Tutorial")){
+            event.setCancelled(true);
+        }
     }
 }
