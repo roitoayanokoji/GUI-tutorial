@@ -77,7 +77,7 @@ public final class GUITutorial extends JavaPlugin implements Listener {
             Player player = (Player) event.getWhoClicked();
             int slot = event.getRawSlot(); //クリックされたスロット番号の取得
 
-            if (slot == 26){
+            if (slot == 43){
                 player.closeInventory(); //GUIを閉じる
                 player.sendMessage("Close GUI");
             }
