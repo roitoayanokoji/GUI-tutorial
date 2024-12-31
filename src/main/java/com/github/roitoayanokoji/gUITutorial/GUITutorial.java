@@ -64,7 +64,7 @@ public final class GUITutorial extends JavaPlugin implements Listener {
             CloseMeta.setDisplayName("Close");
             CloseItem.setItemMeta(CloseMeta);
         }
-        gui.setItem(44,CloseItem);
+        gui.setItem(43,CloseItem);
 
         player.openInventory(gui);
     }
