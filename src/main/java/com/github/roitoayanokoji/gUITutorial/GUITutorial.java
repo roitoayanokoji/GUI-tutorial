@@ -4,12 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class GUITutorial extends JavaPlugin implements Listener {
@@ -43,9 +45,17 @@ public final class GUITutorial extends JavaPlugin implements Listener {
 
     private void openGUI(Player player){
         Inventory gui = Bukkit.createInventory(null,27,"GUI");
-
-        ItemStack item = new ItemStack(Material.STONE);
-        gui.setItem(0, item);
+        //stone
+        ItemStack stone = new ItemStack(Material.STONE);
+        gui.setItem(0, stone);
+        //Close Item
+        ItemStack CloseItem = new ItemStack(Material.BARRIER);
+        ItemMeta CloseMeta = CloseItem.getItemMeta();
+        if (CloseMeta != null){
+            CloseMeta.setDisplayName("Close");
+            CloseItem.setItemMeta(CloseMeta);
+        }
+        gui.setItem(26,CloseItem);
 
         player.openInventory(gui);
     }
@@ -53,7 +63,15 @@ public final class GUITutorial extends JavaPlugin implements Listener {
     @EventHandler
     public void  onInventoryClick(InventoryClickEvent event){
         if (event.getView().getTitle().equals("GUI")){
-            event.setCancelled(true);
+            event.setCancelled(true); //イベントリ内の移動を防ぐ
+
+            Player player = (Player) event.getWhoClicked();
+            int slot = event.getRawSlot(); //クリックされたスロット番号の取得
+
+            if (slot == 26){
+                player.closeInventory(); //GUIを閉じる
+                player.sendMessage("Close GUI");
+            }
         }
     }
 }
